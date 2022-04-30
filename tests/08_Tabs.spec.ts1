@@ -1,0 +1,25 @@
+import { test, expect } from "@playwright/test";
+
+test("basic test", async ({ context, page }) => {
+  await page.goto("https://react-redux.realworld.io/#/login");
+  const title = await page.title();
+  expect(title).toBe("Conduit");
+
+  await page.fill('input[type = "email"]', "qacamp.acad@gmail.com");
+  await page.press('input[type = "email"]', "Tab");
+  await page.type('input[type = "password"]', "test12345");
+
+  const [newPage] = await Promise.all([
+    context.waitForEvent("page"),
+    page.click('a[target="_blank"]'), // Opens a new tab
+  ]);
+
+  await newPage.waitForLoadState();
+  await newPage.click("#issues-tab");
+  await newPage.waitForTimeout(1000);
+  await page.click("a.navbar-brand");
+  await page.bringToFront();
+  await page.waitForTimeout(2000);
+  await newPage.bringToFront();
+  await newPage.waitForTimeout(2000);
+});

@@ -1,0 +1,36 @@
+//import { test, expect } from '@playwright/test';
+const { test, expect } = require('@playwright/test');
+
+test.describe('New Todo', () => {
+test('test', async ({ page }) => {
+  // Go to https://www.google.com/?gws_rd=ssl
+  await page.goto('https://www.google.com/?gws_rd=ssl');
+  // Click img[alt="Google"]
+  await page.locator('img[alt="Google"]').click();
+  // Click [aria-label="Пошук"]
+  await page.locator('[aria-label="Пошук"]').click();
+  // Fill [aria-label="Пошук"]
+  await page.locator('[aria-label="Пошук"]').fill('codegen');
+  // Press Enter
+  await Promise.all([
+    page.waitForNavigation(/*{ url: 'https://www.google.com/search?q=codegen&source=hp&ei=PvZeYpWhOu-TlwSxnrToBg&iflsig=AHkkrS4AAAAAYl8ETsp_mMd64q2sQ8IbxiBX3VSTlG2T&ved=0ahUKEwiVuKiH2KD3AhXvyYUKHTEPDW0Q4dUDCAc&uact=5&oq=codegen&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgcIABCABBAKMgUIABCABDIFCAAQgAQ6CwgAEIAEELEDEIMBOg4ILhCABBCxAxDHARCjAjoRCC4QgAQQsQMQgwEQxwEQ0QM6CAgAEIAEELEDOgsILhCABBCxAxCDAToOCC4QgAQQsQMQxwEQ0QM6CwguEIAEEMcBEK8BOgsILhCABBCxAxDUAjoFCC4QgARQxBNYyi1gmENoAXAAeACAAW2IAe8EkgEDNi4xmAEAoAEBsAEA&sclient=gws-wiz' }*/),
+    page.locator('[aria-label="Пошук"]').press('Enter')
+  ]);
+  // Click #hdtb-msb >> text=Зображення
+  await page.locator('#hdtb-msb >> text=Зображення').click();
+  //await expect(page).toHaveURL('https://www.google.com/search?q=codegen&source=lnms&tbm=isch&sa=X&ved=2ahUKEwios_-P2KD3AhWf_rsIHZx6BoIQ_AUoAXoECAIQAw&biw=1280&bih=720&dpr=1');
+  // Click text=Новини
+  await Promise.all([
+    page.waitForNavigation(/*{ url: 'https://www.google.com/search?q=codegen&source=lmns&tbm=nws&bih=720&biw=1280&hl=uk&sa=X&ved=2ahUKEwi9zJOV2KD3AhXBE2MBHUIZCoEQ_AUoA3oECAEQAw' }*/),
+    page.locator('text=News').click()
+  ]);
+  // Click text=Усі
+  await Promise.all([
+    page.waitForNavigation(/*{ url: 'https://www.google.com/search?q=codegen&hl=uk&source=lnms&sa=X&ved=2ahUKEwjZobaW2KD3AhV6h_0HHaoVAcYQ_AUoAHoECAEQAg&biw=1280&bih=720&dpr=1' }*/),
+    page.locator('text=Усі').click()
+  ]);
+  // Click text=Codegen - Википедия
+  await page.locator('text=Codegen - Википедия').click();
+  await expect(page).toHaveURL('https://ru.wikipedia.org/wiki/Codegen');
+});
+})

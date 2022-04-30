@@ -1,0 +1,28 @@
+import { test } from "@playwright/test";
+
+test("basic test", async ({ browser }) => {
+  const context = await browser.newContext({
+    geolocation: {
+      latitude: 52.2330653,
+      longitude: 20.921112,
+    },
+    permissions: ["geolocation"],
+    locale: "ru-RU",
+  });
+  const context2 = await browser.newContext({
+    geolocation: {
+      latitude: 52.504567,
+      longitude: 13.333383,
+    },
+    permissions: ["geolocation"],
+    locale: "de-DE",
+  });
+
+  const page = await context.newPage();
+  await page.goto("https://maps.google.com");
+  await page.click("button[id*=mylocation]");
+
+  const page2 = await context2.newPage();
+  await page2.goto("https://maps.google.com");
+  await page2.click("button[id*=mylocation]");
+});
