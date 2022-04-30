@@ -33,6 +33,6 @@ test.describe("automation example of creating account at dev.asset.accountant", 
     await page.locator("#ConfirmPassword").fill("Zasdfghjklq123");
     //Click "Register" button
     await page.locator("button.btn").click();
-    await page.pause();
+    //await page.pause();
   });
 });
