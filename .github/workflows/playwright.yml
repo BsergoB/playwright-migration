@@ -20,6 +20,8 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npm run test
+    - name: Install Allure
+      run: npm install allure-commandline --save-dev
     - name: Generate Report
       if: always()
       run: npm run allure-generate
