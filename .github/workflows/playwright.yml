@@ -32,6 +32,6 @@ jobs:
         path: allure-report
         retention-days: 30
     - name: Copy report to docs
-      run: mv ./allure-report/* ./docs
+      run: mv ./allure-report/* docs
     - name: File list
       run: ls
