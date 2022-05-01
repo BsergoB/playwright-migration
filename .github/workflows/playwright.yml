@@ -31,9 +31,9 @@ jobs:
         name: allure-report
         path: allure-report
         retention-days: 30
-    #- name: Deploy report
-    #  uses: JamesIves/github-pages-deploy-action@4.1.4
-    #  if: always()
-    #  with:
-    #    branch: master # The branch the action should deploy to.
-    #    folder: ./docs/ # The folder the action should deploy.
+    - name: Deploy report
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      if: always()
+      with:
+        branch: master # The branch the action should deploy to.
+        folder: ./docs # The folder the action should deploy.
