@@ -35,6 +35,7 @@ jobs:
       run: mv ./allure-report/* docs
     - name: File list root folder
       run: ls
-    - name: File list docs folder
+    - name: Change directory to docs folder
       run: cd docs
+    - name: File list docs folder
       run: ls
