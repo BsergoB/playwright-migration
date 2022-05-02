@@ -32,10 +32,12 @@ jobs:
         path: ./allure-report
         retention-days: 30
     - name: Copy report to docs
-      run: cp ./allure-report/* docs
+      run: cp -r ./allure-report/* docs
     - name: File list root folder
       run: ls
     - name: Change directory to docs folder
       run: cd ./docs
     - name: File list docs folder
       run: ls
+    - name: Docker container list
+      run: docker container ls
