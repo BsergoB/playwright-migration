@@ -20,9 +20,22 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npm run test
-    - uses: actions/upload-artifact@v2
+    - name: Install Allure
+      run: npm install allure-commandline --save-dev
+    - name: Generate Report
+      if: always()
+      run: npm run allure-generate
+    - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: playwright-report
-        path: playwright-report/
+        name: allure-report-artifact
+        path: ./docs
         retention-days: 30
+    - name: Copy report to docs
+      run: mv ./allure-report/* docs
+    - name: File list root folder
+      run: ls
+    - name: Change directory to docs folder
+      run: cd ./docs
+    - name: File list docs folder
+      run: ls
